@@ -7,7 +7,7 @@
 Summary:	An elegant, structured XHTML/XML templating engine
 Name:		ruby-%{pkgname}
 Version:	4.0.5
-Release:	1
+Release:	2
 License:	MIT and WTFPL
 Group:		Development/Languages
 Source0:	http://rubygems.org/gems/%{pkgname}-%{version}.gem
@@ -53,15 +53,19 @@ Documentation for %{name}
 %patch0 -p1
 
 %build
+# write .gemspec
+%__gem_helper spec
+
 %if %{with tests}
 ruby -Ilib:test test/*_test.rb
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir},%{_bindir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
 cp -a bin/* $RPM_BUILD_ROOT%{_bindir}
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -72,3 +76,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/haml
 %{ruby_vendorlibdir}/haml.rb
 %{ruby_vendorlibdir}/haml
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
