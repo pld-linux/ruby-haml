@@ -7,7 +7,7 @@
 Summary:	An elegant, structured XHTML/XML templating engine
 Name:		ruby-%{pkgname}
 Version:	4.0.5
-Release:	2
+Release:	3
 License:	MIT and WTFPL
 Group:		Development/Languages
 Source0:	http://rubygems.org/gems/%{pkgname}-%{version}.gem
